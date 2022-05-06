@@ -26,12 +26,6 @@ describe('Test for User service', () => {
         expect(user).not.toBeNull()
     })
 
-    test('Get all users', async () => {
-        const users = await UserService.getAllUsers()
-        // console.log(users)
-        expect(users).not.toBeNull()
-    })
-
     test('Get users by role', async () => {
         const users = await UserService.getUserByRole(2)
         // console.log(users)

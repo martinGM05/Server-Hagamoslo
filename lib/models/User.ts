@@ -6,8 +6,9 @@ interface User{
     urlFoto: string
     numero: string
     localizacion: string
-    descripcion?: string 
     idRol: number
+    descripcion?: string
+    valoracion?: number 
 }
 
 export default User

@@ -17,6 +17,18 @@ class UserService{
     static getUserById(id: number){
         return prisma.usuario.findFirst({
             where: { id }
+        }).then(user => {
+            return {
+                id: user?.id,
+                nombre: user?.nombre,
+                correo: user?.correo,
+                urlFoto: user?.urlFoto,
+                numero: user?.numero,
+                localizacion: user?.localizacion,
+                idRol: user?.idRol,
+                descripcion: user?.descripcion,
+                valoracion: user?.valoracion
+            }
         })
     }
 
@@ -45,15 +57,24 @@ class UserService{
         })
     }
 
+    static changeRoleClient(idUser: number, idRol:number){
+
+        return prisma.usuario.update({
+            where: { id: idUser },
+            data: { idRol }
+        }).then(user => {
+            return {
+                message: 'Se cambió el rol del usuario'
+            }
+        })
+
+    }
+
     static putUser(id: number, user: User){
         return prisma.usuario.update({
             where: { id: id },
             data: user
         })
-    }
-
-    static getAllUsers(){
-        return prisma.usuario.findMany()
     }
 
     static getUserByRole(idRol: number){

@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import UserService from "../service/UserService";
-const jwt = require('jsonwebtoken');
 
 
 export const authenticateUser = async (req: Request, res: Response) => {

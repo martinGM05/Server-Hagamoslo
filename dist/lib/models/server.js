@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const usuarios_1 = __importDefault(require("../routes/usuarios"));
 const auth_1 = __importDefault(require("../routes/auth"));
+const workers_1 = __importDefault(require("../routes/workers"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 class Server {
@@ -13,6 +14,7 @@ class Server {
         this.apiPaths = {
             auth: '/api/auth',
             usuarios: '/api/usuarios',
+            workers: '/api/workers',
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8000';
@@ -27,6 +29,7 @@ class Server {
     routes() {
         this.app.use(this.apiPaths.auth, auth_1.default);
         this.app.use(this.apiPaths.usuarios, usuarios_1.default);
+        this.app.use(this.apiPaths.workers, workers_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

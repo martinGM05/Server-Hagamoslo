@@ -24,29 +24,36 @@ model Usuario{
   urlFoto String
   numero String
   localizacion String
-  descripcion String?
   idRol Int
   Rol Roles @relation(fields: [idRol], references: [id])
+  descripcion String? @default("")
+  valoracion Int? @default(0)
+  // servicios ServiciosOnUsers[]
   // comentarios Comentario[]
 }
+
+// model ServiciosOnUsers{
+//   servicios Servicios @relation(fields: [idServicio], references: [id])
+//   idServicio Int
+//   Usuario Usuario @relation(fields: [idUsuario], references: [id])
+//   idUsuario Int
+//   @@id([idServicio, idUsuario])
+// }
+
+// model Servicios{
+//   id Int @id @default(autoincrement())
+//   nombre String
+//   icono String
+//   Usuario ServiciosOnUsers[]
+// }
+
+
 
 // model Comentario{
 //   id Int @id @default(autoincrement())
 //   comentario String
 //   idUsuario Int
 //   Usuario Usuario @relation(fields: [idUsuario], references: [id])
-// }
-
-// model Cliente {
-//   id Int @id @default(autoincrement())
-//   nombre String
-//   correo String
-//   urlFoto String
-//   numero Int
-//   contrasena String
-//   localizacion String
-//   enCurso EnCurso[]
-//   historial Historial[]
 // }
 
 // model EnCurso {
