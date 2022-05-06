@@ -3,6 +3,7 @@ import User from '../models/User'
 
 const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient()
+const jwt = require('jsonwebtoken');
 
 class UserService{
 
@@ -25,7 +26,16 @@ class UserService{
         }).then(user => {
             if(user){
                 if(bcrypt.compareSync(contrasena, user.contrasena)){
-                    return user
+                    const userForToken = {
+                        id: user.id,
+                        correo: user.correo,
+                        idRol: user.idRol
+                    }
+                    const token = jwt.sign(userForToken, process.env.SECRET);
+                    return {
+                        user,
+                        token
+                    }
                 }else{
                     return null
                 }
@@ -35,9 +45,9 @@ class UserService{
         })
     }
 
-    static putUser(user: User){
+    static putUser(id: number, user: User){
         return prisma.usuario.update({
-            where: { id: user.id },
+            where: { id: id },
             data: user
         })
     }
