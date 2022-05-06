@@ -9,3 +9,54 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Roles{
+  id Int @id @default(autoincrement())
+  rol String
+  Usuarios Usuario[]
+}
+
+model Usuario{
+  id Int @id @default(autoincrement())
+  nombre String
+  correo String @unique
+  contrasena String
+  urlFoto String
+  numero String
+  localizacion String
+  descripcion String?
+  idRol Int
+  Rol Roles @relation(fields: [idRol], references: [id])
+  // comentarios Comentario[]
+}
+
+// model Comentario{
+//   id Int @id @default(autoincrement())
+//   comentario String
+//   idUsuario Int
+//   Usuario Usuario @relation(fields: [idUsuario], references: [id])
+// }
+
+// model Cliente {
+//   id Int @id @default(autoincrement())
+//   nombre String
+//   correo String
+//   urlFoto String
+//   numero Int
+//   contrasena String
+//   localizacion String
+//   enCurso EnCurso[]
+//   historial Historial[]
+// }
+
+// model EnCurso {
+//   id Int @id @default(autoincrement())
+//   cliente Cliente @relation(fields: [idCliente], references: [id])
+//   idCliente Int
+// }
+
+// model Historial {
+//   id Int @id @default(autoincrement())
+//   cliente Cliente @relation(fields: [idCliente], references: [id])
+//   idCliente Int
+// }
