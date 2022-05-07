@@ -1,15 +1,16 @@
 import { Router } from 'express';
-import { getAllUsersClient, putRoleWorker } from '../controller/WorkerControllers';
+import { getServices, getWorkesByTag } from '../controller/TagController';
 import validateJWT from '../middlewares/ValidateJWT';
 
 const router = Router();
 
 router.get('/', [
     validateJWT,
-],getAllUsersClient);
+], getServices);
 
-router.put('/:idUser', [
+router.get('/:idTag', [
     validateJWT,
-],putRoleWorker);
+], getWorkesByTag);
+
 
 export default router;

@@ -2,6 +2,7 @@ import express, { Application } from "express"
 import userRoutes from "../routes/usuarios";
 import authRoutes from "../routes/auth";
 import workerRoutes from "../routes/workers";
+import tagRoutes from "../routes/tag";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
@@ -13,6 +14,7 @@ class Server {
         auth: '/api/auth',
         usuarios: '/api/usuarios',
         workers: '/api/workers',
+        tag: '/api/service'
     }
 
     constructor() {
@@ -33,6 +35,7 @@ class Server {
         this.app.use(this.apiPaths.auth, authRoutes)
         this.app.use(this.apiPaths.usuarios, userRoutes)
         this.app.use(this.apiPaths.workers, workerRoutes)
+        this.app.use(this.apiPaths.tag, tagRoutes)
     }
 
     listen(){

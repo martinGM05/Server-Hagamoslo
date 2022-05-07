@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import User from '../models/User'
+import generateJWT from '../helpers/generate-jwt';
 
 const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient()
-const jwt = require('jsonwebtoken');
 
 class UserService{
 
@@ -35,15 +35,19 @@ class UserService{
     static authenticateUser(correo: string, contrasena: string){
         return prisma.usuario.findFirst({
             where: { correo }
-        }).then(user => {
+        }).then(async user => {
             if(user){
                 if(bcrypt.compareSync(contrasena, user.contrasena)){
                     const userForToken = {
                         id: user.id,
                         correo: user.correo,
-                        idRol: user.idRol
+                        nombre: user.nombre,
+                        urlFoto: user.urlFoto,
+                        numero: user.numero,
+                        idRol: user.idRol,
                     }
-                    const token = jwt.sign(userForToken, process.env.SECRET);
+                    const token = await generateJWT(userForToken);
+
                     return {
                         user,
                         token

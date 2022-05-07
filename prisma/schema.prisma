@@ -11,59 +11,38 @@ datasource db {
 }
 
 model Roles{
-  id Int @id @default(autoincrement())
-  rol String
-  Usuarios Usuario[]
+  id            Int         @id @default(autoincrement())
+  rol           String
+  Usuarios      Usuario[]
 }
 
 model Usuario{
-  id Int @id @default(autoincrement())
-  nombre String
-  correo String @unique
-  contrasena String
-  urlFoto String
-  numero String
-  localizacion String
-  idRol Int
-  Rol Roles @relation(fields: [idRol], references: [id])
-  descripcion String? @default("")
-  valoracion Int? @default(0)
-  // servicios ServiciosOnUsers[]
-  // comentarios Comentario[]
+  id            Int         @id @default(autoincrement())
+  nombre        String
+  correo        String      @unique
+  contrasena    String
+  urlFoto       String
+  numero        String
+  localizacion  String
+  idRol         Int
+  Rol           Roles       @relation(fields: [idRol], references: [id])
+  descripcion   String?     @default("")
+  valoracion    Int?        @default(0)
+  tags          Servicio[]
 }
 
-// model ServiciosOnUsers{
-//   servicios Servicios @relation(fields: [idServicio], references: [id])
-//   idServicio Int
-//   Usuario Usuario @relation(fields: [idUsuario], references: [id])
-//   idUsuario Int
-//   @@id([idServicio, idUsuario])
-// }
+model Servicio{
+  id            Int         @default(autoincrement())
+  tag           Tag         @relation(fields: [idTag], references: [id])
+  idTag         Int
+  usuario       Usuario     @relation(fields: [idUsuario], references: [id])
+  idUsuario     Int
+  @@id([idTag, idUsuario])
+}
 
-// model Servicios{
-//   id Int @id @default(autoincrement())
-//   nombre String
-//   icono String
-//   Usuario ServiciosOnUsers[]
-// }
-
-
-
-// model Comentario{
-//   id Int @id @default(autoincrement())
-//   comentario String
-//   idUsuario Int
-//   Usuario Usuario @relation(fields: [idUsuario], references: [id])
-// }
-
-// model EnCurso {
-//   id Int @id @default(autoincrement())
-//   cliente Cliente @relation(fields: [idCliente], references: [id])
-//   idCliente Int
-// }
-
-// model Historial {
-//   id Int @id @default(autoincrement())
-//   cliente Cliente @relation(fields: [idCliente], references: [id])
-//   idCliente Int
-// }
+model Tag{
+  id            Int         @id @default(autoincrement())
+  nombre        String
+  icono         String
+  usuarios      Servicio[]
+}

@@ -1,46 +1,65 @@
 import { PrismaClient } from '@prisma/client'
+import UserService from './UserService';
 
 const prisma = new PrismaClient()
 
-class WorkerService{
+export interface createWorkerProps {
+    idUser: number, 
+    description: string, 
+    valoracion: number, 
+    email: string, 
+    password: string
+}
 
-    static changeRoleWorker(idUser: number, idRol: number, description: string, valoracion: number){
-        return prisma.usuario.update({
-            where: { id: idUser },
-            data: {
-                idRol,
-                descripcion: description,
-                valoracion
-            }
-        }).then(user => {
-            return {
-                message: 'Se cambió el rol del usuario'
-            }
-        }).catch(err => {
-            return 'No se pudo cambiar el rol del usuario: ' + err
-        })
-    }
 
-    static getAllWorkersAndClients(){
-        return prisma.usuario.findMany({
-            where: {
-                idRol: { in: [2, 3] }
-            }
-        }).then(users => {
-            return users.map(user => {
+const changeRoleWorker = async (props: createWorkerProps) => {
+
+    const { idUser, email, password, description, valoracion } = props
+    
+    const user = await UserService.authenticateUser(email, password);
+    if (user) {
+        if(user?.user.idRol === 1){
+            const changeRol = await prisma.usuario.update({
+                where: { id: idUser },
+                data: { idRol: 3, descripcion: description, valoracion }
+            })
+            if (changeRol) {
                 return {
-                    id: user.id,
-                    nombre: user.nombre,
-                    correo: user.correo,
-                    urlFoto: user.urlFoto,
-                    numero: user.numero,
-                    localizacion: user.localizacion,
-                    idRol: user.idRol,
-                    descripcion: user.descripcion,
-                    valoracion: user.valoracion
+                    message: 'Se cambió el rol del usuario'
                 }
-        })})
+            }else{
+                return 'Error al cambiar rol'
+            }
+        }else if(user?.user.idRol === 2){
+            return 'El usuario ya es un trabajador'
+        }else if(user?.user.idRol === 3){
+            return 'El usuario es un cliente y trabajador'
+        }
     }
 }
 
-export default WorkerService;
+const getAllWorkersAndClients = () => {
+
+    return prisma.usuario.findMany({
+        where: { idRol: { in: [2, 3] } },
+    }).then(users => {
+        return users.map(user => {
+            return {
+                id: user.id,
+                nombre: user.nombre,
+                correo: user.correo,
+                urlFoto: user.urlFoto,
+                numero: user.numero,
+                localizacion: user.localizacion,
+                idRol: user.idRol,
+                descripcion: user.descripcion,
+                valoracion: user.valoracion
+            }
+        })
+    })
+}
+
+export {
+    changeRoleWorker,
+    getAllWorkersAndClients
+}
