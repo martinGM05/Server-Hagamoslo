@@ -29,6 +29,22 @@ model Usuario{
   descripcion   String?     @default("")
   valoracion    Int?        @default(0)
   tags          Servicio[]
+  comentarioUsuario  ComentarioUsuario[]
+}
+
+model Comentario{
+  id            Int         @id @default(autoincrement())
+  comentario    Json
+  ComentarioUsuario ComentarioUsuario[]
+}
+
+model ComentarioUsuario{
+  id            Int         @default(autoincrement())
+  idUsuario     Int
+  idComentario  Int
+  Usuario       Usuario     @relation(fields: [idUsuario], references: [id])
+  Comentario    Comentario  @relation(fields: [idComentario], references: [id])
+  @@id([idUsuario, idComentario])
 }
 
 model Servicio{
