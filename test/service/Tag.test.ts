@@ -5,21 +5,33 @@ const prisma = new PrismaClient()
 
 describe('Test for Tag service', () => {
 
-    test('1) Add Tags to Worker', async () => {
-        // const assigments = [
-        //     {
-        //         idUsuario: 6,
-        //         idTag: 1
-        //     },
-        //     {
-        //         idUsuario: 8,
-        //         idTag: 1
-        //     }
-        // ]
+    test('0) Create tags', async () => {
+            
+        const tags = await prisma.tag.createMany({
+            data: [
+                { nombre: 'Carpintero', icono: 'carpintero-svg'},
+                { nombre: 'Electricista', icono: 'electricista-svg'},
+                { nombre: 'Mecanico', icono: 'mecanico-svg'},
+                { nombre: 'Pintor', icono: 'pintor-svg'},
+            ]
+        })    
+        
+        expect(tags.count).toBeGreaterThan(0)
 
-        // await prisma.servicio.createMany({
-        //     data: assigments,
-        // })
+    })
+
+    test('1) Add Tags to Worker', async () => {
+        const assigments = [
+            { idUsuario: 4, idTag: 1 },
+            { idUsuario: 4, idTag: 2 },
+            { idUsuario: 5, idTag: 2 },
+            { idUsuario: 5, idTag: 3 },
+            { idUsuario: 6, idTag: 4 },
+        ]
+
+        await prisma.servicio.createMany({
+            data: assigments,
+        })
 
         const allAssigments = await prisma.servicio.findMany();
         // console.log(allAssigments)

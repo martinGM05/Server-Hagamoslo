@@ -59,6 +59,10 @@ const getAllWorkersAndClients = () => {
     })
 }
 
+const postJoinTagWithWorker = async (idUser: number, idTag: number) => {
+    
+}
+
 export {
     changeRoleWorker,
     getAllWorkersAndClients

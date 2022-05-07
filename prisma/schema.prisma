@@ -30,6 +30,8 @@ model Usuario{
   valoracion    Int?        @default(0)
   tags          Servicio[]
   comentarioUsuario  ComentarioUsuario[]
+  Contratado    ServicioContratado[] @relation("Trabajador")
+  Solicitante   ServicioContratado? @relation("Usuario")
 }
 
 model Comentario{
@@ -46,6 +48,20 @@ model ComentarioUsuario{
   Comentario    Comentario  @relation(fields: [idComentario], references: [id])
   @@id([idUsuario, idComentario])
 }
+
+model ServicioContratado{
+  id            Int         @id @default(autoincrement())
+  idUsuario     Int
+  Usuario       Usuario     @relation(name:"Usuario", fields: [idUsuario], references: [id])
+  idTrabajador  Int
+  Trabajador    Usuario     @relation(name:"Trabajador", fields: [idTrabajador], references: [id])
+  descripcion   String      @db.VarChar(100)
+  fechaInicio   DateTime    @default(now()) @db.Date
+  fechaFin      DateTime    @updatedAt @db.Date
+  estado        Boolean     @default(true)
+  costo         Float
+}
+
 
 model Servicio{
   id            Int         @default(autoincrement())

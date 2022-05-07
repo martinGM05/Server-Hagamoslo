@@ -9,9 +9,7 @@ router.get('/:id', [
     validateJWT,
 ], getUsuario);
 
-router.post('/', [
-    validateJWT,
-],postUsuario);
+router.post('/', postUsuario);
 
 router.put('/:id', [
     validateJWT,
