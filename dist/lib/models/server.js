@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const usuarios_1 = __importDefault(require("../routes/usuarios"));
+const users_1 = __importDefault(require("../routes/users"));
 const auth_1 = __importDefault(require("../routes/auth"));
 const workers_1 = __importDefault(require("../routes/workers"));
 const tag_1 = __importDefault(require("../routes/tag"));
@@ -14,7 +14,7 @@ class Server {
     constructor() {
         this.apiPaths = {
             auth: '/api/auth',
-            usuarios: '/api/usuarios',
+            users: '/api/usuarios',
             workers: '/api/workers',
             tag: '/api/service'
         };
@@ -30,7 +30,7 @@ class Server {
     }
     routes() {
         this.app.use(this.apiPaths.auth, auth_1.default);
-        this.app.use(this.apiPaths.usuarios, usuarios_1.default);
+        this.app.use(this.apiPaths.users, users_1.default);
         this.app.use(this.apiPaths.workers, workers_1.default);
         this.app.use(this.apiPaths.tag, tag_1.default);
     }

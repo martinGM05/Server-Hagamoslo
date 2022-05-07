@@ -1,5 +1,5 @@
 import express, { Application } from "express"
-import userRoutes from "../routes/usuarios";
+import userRoutes from "../routes/users";
 import authRoutes from "../routes/auth";
 import workerRoutes from "../routes/workers";
 import tagRoutes from "../routes/tag";
@@ -12,7 +12,7 @@ class Server {
     private port: string;
     private apiPaths = {
         auth: '/api/auth',
-        usuarios: '/api/usuarios',
+        users: '/api/usuarios',
         workers: '/api/workers',
         tag: '/api/service'
     }
@@ -33,7 +33,7 @@ class Server {
 
     routes(){
         this.app.use(this.apiPaths.auth, authRoutes)
-        this.app.use(this.apiPaths.usuarios, userRoutes)
+        this.app.use(this.apiPaths.users, userRoutes)
         this.app.use(this.apiPaths.workers, workerRoutes)
         this.app.use(this.apiPaths.tag, tagRoutes)
     }
