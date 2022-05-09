@@ -32,6 +32,26 @@ model Usuario{
   comentarioUsuario  ComentarioUsuario[]
   Contratado    ServicioContratado[] @relation("Trabajador")
   Solicitante   ServicioContratado? @relation("Usuario")
+  Blog           Blog[]
+  ComentarioBlog ComentarioBlog[]
+}
+
+model Blog{
+  id            Int         @id @default(autoincrement())
+  titulo        String
+  descripcion   String
+  idUsuario     Int
+  Usuario       Usuario     @relation(fields: [idUsuario], references: [id])
+  comentarioBlog ComentarioBlog[]
+}
+
+model ComentarioBlog{
+  id            Int         @id @default(autoincrement())
+  comentario    String
+  idBlog        Int
+  Blog          Blog        @relation(fields: [idBlog], references: [id])
+  idTrabajador  Int
+  Usuario       Usuario     @relation(fields: [idTrabajador], references: [id])
 }
 
 model Comentario{
