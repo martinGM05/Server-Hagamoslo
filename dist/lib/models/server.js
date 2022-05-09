@@ -8,6 +8,7 @@ const users_1 = __importDefault(require("../routes/users"));
 const auth_1 = __importDefault(require("../routes/auth"));
 const workers_1 = __importDefault(require("../routes/workers"));
 const tag_1 = __importDefault(require("../routes/tag"));
+const hired_1 = __importDefault(require("../routes/hired"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 class Server {
@@ -16,7 +17,8 @@ class Server {
             auth: '/api/auth',
             users: '/api/usuarios',
             workers: '/api/workers',
-            tag: '/api/service'
+            tag: '/api/service',
+            hired: '/api/hired',
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8000';
@@ -33,6 +35,7 @@ class Server {
         this.app.use(this.apiPaths.users, users_1.default);
         this.app.use(this.apiPaths.workers, workers_1.default);
         this.app.use(this.apiPaths.tag, tag_1.default);
+        this.app.use(this.apiPaths.hired, hired_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

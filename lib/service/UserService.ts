@@ -7,12 +7,18 @@ const prisma = new PrismaClient()
 
 class UserService{
 
-    static createUser(user: User){
-        user.contrasena = bcrypt.hashSync(user.contrasena, 9);
+    static createUser = async(user: User) => {
         return prisma.usuario.create({
-            data: user
+            data: {
+                ...user,
+                contrasena: bcrypt.hashSync(user.contrasena, 9)
+            }
         })
     }    
+
+    static getAllUsers(){
+        return prisma.usuario.findMany()
+    }
 
     static getUserById(id: number){
         return prisma.usuario.findFirst({

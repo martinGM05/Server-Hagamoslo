@@ -1,6 +1,15 @@
 import { Request, Response } from "express";
 import UserService from "../service/UserService";
 
+export const getUsers = async (req: Request, res: Response) => {
+    const users = await UserService.getAllUsers()
+    if (users) {
+        res.status(200).json(users)
+    }else{
+        res.status(404).json({ message: "No hay usuarios" })
+    }
+}
+
 export const getUsuario = async (req: Request, res: Response) => {
     const { id } = req.params;
     // const idLogged = req.body.correo // Regresa el id del usuario logueado  
