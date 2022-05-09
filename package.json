@@ -6,7 +6,10 @@
   "scripts": {
     "tsc-watch": "tsc --watch",
     "nodemon": "nodemon dist/app.js",
-    "test": "node ./node_modules/jest/bin/jest.js"
+    "test": "node ./node_modules/jest/bin/jest.js",
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
