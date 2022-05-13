@@ -3,7 +3,7 @@ import { authenticateUser } from '../controller/AuthController';
 
 const router = Router();
 
-router.get('/', authenticateUser);
+router.post('/', authenticateUser);
 
 
 export default router;

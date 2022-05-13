@@ -9,6 +9,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
             .then(user => {
                 res.status(200).json({
                     msg: 'Usuario autenticado',
+                    user
                 });
             })
             .catch(err => {
