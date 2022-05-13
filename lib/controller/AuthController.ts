@@ -4,13 +4,17 @@ import UserService from "../service/UserService";
 
 export const authenticateUser = async (req: Request, res: Response) => {
     const { correo, contrasena } = req.body;
-    
-    const user = await UserService.authenticateUser(correo, contrasena);
-    if(user){
-        res.status(200).json(user);
-    }else{
-        res.status(404).json({
-            message: 'Error al autenticar usuario'
-        });
+    try {
+        const user = await UserService.authenticateUser(correo, contrasena);
+        if(user){
+            res.status(200).json(user);
+        }else{
+            res.status(400).json({
+                message: 'Error al autenticar usuario'
+            });
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error al autenticar usuario' });
     }
 }
