@@ -39,30 +39,29 @@ class UserService{
     }
 
     static authenticateUser(correo: string, contrasena: string){
-        return prisma.usuario.findFirst({
+        return prisma.usuario.findUnique({
             where: { correo }
         }).then(async user => {
-            return user
-            // if(user){
-            //     if(bcrypt.compareSync(contrasena, user.contrasena)){
-            //         const userForToken = {
-            //             id: user.id,
-            //             correo: user.correo,
-            //             nombre: user.nombre,
-            //             urlFoto: user.urlFoto,
-            //             numero: user.numero,
-            //             idRol: user.idRol,
-            //         }
-            //         const token = await generateJWT(userForToken);
-
-            //         return {
-            //             user,
-            //             token
-            //         }
-            //     }else{
-            //         return null
-            //     }
-            // }
+            
+                if(bcrypt.compareSync(contrasena, user?.contrasena)){
+                    const userForToken = {
+                        id: user!.id,
+                        correo: user!.correo,
+                        nombre: user!.nombre,
+                        urlFoto: user!.urlFoto,
+                        numero: user!.numero,
+                        idRol: user!.idRol,
+                    }
+                    const token = await generateJWT(userForToken)
+                    return {
+                        user,
+                        token
+                    }
+                }else{
+                    return {
+                        message: 'Contraseña incorrecta'
+                    }
+                }
         }).catch(err => {
             return null
         })
