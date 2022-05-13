@@ -1,22 +1,23 @@
-import { Router } from 'express';
-import { getUsers, getUsuario, postUsuario, putUsuario } from '../controller/UsuariosController';
+import { Request, Router } from 'express';
+import UsuariosControllers from '../controller/UsuariosController';
 import validateJWT from '../middlewares/ValidateJWT';
 
 const router = Router();
 
 router.get('/', [
-    validateJWT,
-],getUsers);
+    // validateJWT,
+], UsuariosControllers.getUsers);
 
 router.get('/:id', [
     validateJWT,
-], getUsuario);
+], UsuariosControllers.getUsuario);
 
-router.post('/', postUsuario);
+router.post('/', UsuariosControllers.postUsuario);
+
+router.post('/image', UsuariosControllers.uploadImage);
 
 router.put('/:id', [
     validateJWT,
-], putUsuario);
-
+], UsuariosControllers.putUsuario);
 
 export default router;

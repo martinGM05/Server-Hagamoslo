@@ -10,7 +10,7 @@ const workers_1 = __importDefault(require("../routes/workers"));
 const tag_1 = __importDefault(require("../routes/tag"));
 const hired_1 = __importDefault(require("../routes/hired"));
 const cors_1 = __importDefault(require("cors"));
-const body_parser_1 = __importDefault(require("body-parser"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 class Server {
     constructor() {
         this.apiPaths = {
@@ -27,8 +27,13 @@ class Server {
     }
     middlewares() {
         this.app.use((0, cors_1.default)());
-        this.app.use(body_parser_1.default.json({ limit: '50mb' }));
         this.app.use(express_1.default.json());
+        this.app.use(express_1.default.static('public'));
+        this.app.use((0, express_fileupload_1.default)({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true,
+        }));
     }
     routes() {
         this.app.use(this.apiPaths.auth, auth_1.default);

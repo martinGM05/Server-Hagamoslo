@@ -22,10 +22,10 @@ describe('Test for Tag service', () => {
 
     test('1) Add Tags to Worker', async () => {
         const assigments = [
-            { idUsuario: 4, idTag: 1 },
-            { idUsuario: 4, idTag: 2 },
-            { idUsuario: 5, idTag: 2 },
-            { idUsuario: 5, idTag: 3 },
+            { idUsuario: 6, idTag: 1 },
+            { idUsuario: 6, idTag: 2 },
+            { idUsuario: 7, idTag: 2 },
+            { idUsuario: 7, idTag: 3 },
             { idUsuario: 6, idTag: 4 },
         ]
 
@@ -47,13 +47,13 @@ describe('Test for Tag service', () => {
             return { ...user, tags: user.tags.map(tag => tag.tag.nombre) }
         })
 
-        // console.log(JSON.stringify(restul))
+        console.log(JSON.stringify(restul))
         expect(restul).not.toEqual([])
     })
 
     test('3) Get all services', async () => {
         const allServices = await prisma.tag.findMany()
-        // console.log(JSON.stringify(allServices))
+        console.log(JSON.stringify(allServices))
         expect(allServices).not.toEqual([])
     })
 
@@ -78,7 +78,7 @@ describe('Test for Tag service', () => {
             }
         })
 
-        // console.log(JSON.stringify(result))
+        console.log(JSON.stringify(result))
         expect(result).not.toEqual([])
     })
 

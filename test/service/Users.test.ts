@@ -6,18 +6,21 @@ const prisma = new PrismaClient()
 
 describe('Test for User service', () => {
 
-    // test('Create User', () => {
-    //     const user: User = {
-    //         nombre: 'Manuel',
-    //         correo: 'manuel.gm05@gmail.com',
-    //         contrasena: '123456',
-    //         urlFoto: '',
-    //         localizacion: 'Lat: -34.6083, Long: -58.3712',
-    //         numero: '2311434214',
-    //         idRol: 1
-    //     }
-    //     return UserService.createUser(user)
-    // })
+    test('Create User', () => {
+        const user: User = {
+            nombre: 'Ivan',
+            correo: 'ivan@gmail.com',
+            contrasena: '123456',
+            urlFoto: '',
+            localizacion: 'Lat: -34.6083, Long: -58.3712',
+            numero: '2311434214',
+            idRol: 1,
+
+        }
+        const userNew =  UserService.createUser(user)
+        console.log(userNew)
+        expect(userNew).not.toBeNull()
+    })
 
 
     test('Get users', async () => {

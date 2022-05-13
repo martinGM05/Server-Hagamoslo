@@ -5,7 +5,7 @@ import workerRoutes from "../routes/workers";
 import tagRoutes from "../routes/tag";
 import hiredRoutes from "../routes/hired";
 import cors from 'cors';
-import bodyParser from 'body-parser';
+import fileUpload from "express-fileupload";
 
 class Server {
     
@@ -28,8 +28,14 @@ class Server {
 
     middlewares(){
         this.app.use(cors())
-        this.app.use(bodyParser.json({limit: '50mb'}))
         this.app.use(express.json())
+        this.app.use(express.static('public'));
+
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true,
+        }))
 
     }
 
