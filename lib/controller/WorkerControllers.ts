@@ -25,12 +25,12 @@ export const putRoleWorker = async (req: Request, res: Response) => {
     }
 
     const user = await changeRoleWorker(propsWorker);
-    if(user){
-        res.status(200).json(user);
-    }else{
-        res.status(404).json({
-            message: 'Error al cambiar rol'
-        });
-    }
+    // if(user){
+    //     res.status(200).json(user);
+    // }else{
+    //     res.status(404).json({
+    //         message: 'Error al cambiar rol'
+    //     });
+    // }
 
 }
