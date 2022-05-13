@@ -7,7 +7,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
     try {
         await UserService.authenticateUser(correo, contrasena)
             .then(user => {
-                res.status(200).json(user);
+                res.status(200).json({
+                    msg: 'Usuario autenticado',
+                });
             })
             .catch(err => {
                 res.status(500).json({

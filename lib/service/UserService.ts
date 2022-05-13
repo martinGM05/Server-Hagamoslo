@@ -59,15 +59,11 @@ class UserService{
                         token
                     }
                 }else{
-                    return {
-                        message: 'Contraseña incorrecta'
-                    }
+                    return null
                 }
             }
         }).catch(err => {
-            return {
-                message: 'Usuario no encontrado'
-            }
+            return null
         })
     }
 
