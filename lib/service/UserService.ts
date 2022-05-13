@@ -42,26 +42,27 @@ class UserService{
         return prisma.usuario.findFirst({
             where: { correo }
         }).then(async user => {
-            if(user){
-                if(bcrypt.compareSync(contrasena, user.contrasena)){
-                    const userForToken = {
-                        id: user.id,
-                        correo: user.correo,
-                        nombre: user.nombre,
-                        urlFoto: user.urlFoto,
-                        numero: user.numero,
-                        idRol: user.idRol,
-                    }
-                    const token = await generateJWT(userForToken);
+            return user
+            // if(user){
+            //     if(bcrypt.compareSync(contrasena, user.contrasena)){
+            //         const userForToken = {
+            //             id: user.id,
+            //             correo: user.correo,
+            //             nombre: user.nombre,
+            //             urlFoto: user.urlFoto,
+            //             numero: user.numero,
+            //             idRol: user.idRol,
+            //         }
+            //         const token = await generateJWT(userForToken);
 
-                    return {
-                        user,
-                        token
-                    }
-                }else{
-                    return null
-                }
-            }
+            //         return {
+            //             user,
+            //             token
+            //         }
+            //     }else{
+            //         return null
+            //     }
+            // }
         }).catch(err => {
             return null
         })
