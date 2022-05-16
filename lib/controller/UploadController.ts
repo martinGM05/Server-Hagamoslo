@@ -7,6 +7,40 @@ const { uploadImageServer } = require('../helpers/upload-image')
 const path = require('path')
 const fs = require('fs')
 
+
+export const viewImage = async (req: Request, res: Response) => {
+    
+    const { id, carpeta } = req.params;
+
+    switch (carpeta) {
+        case 'Users':
+            let modelo = await prisma.usuario.findUnique({ where: { id: Number(id) } })
+            if(!modelo) {
+                return res.status(400).json({
+                    message: `No se encontro el usuario con id ${id}`
+                });
+            }
+
+            if(modelo.urlFoto){
+                const pathImage = path.join(__dirname, '../images', carpeta, modelo.urlFoto);
+                if(fs.existsSync(pathImage)){
+                    return res.sendFile(pathImage);
+                }
+            }
+
+            const pathImage = path.join(__dirname, '../assets/no-image.jpg');
+            return res.sendFile(pathImage);
+
+            break;
+
+        default:
+            return res.status(400).json({
+                message: `No se encontro el usuario con id ${id}`
+            })
+    };
+
+}
+
 export const uploadImage = async (req: any, res: Response) => {
     try {
         const nombre = await uploadImageServer(req.files, 'users')
@@ -28,7 +62,6 @@ export const updateImage = async (req: any, res: Response) => {
                 });
             }
 
-            // Clear image previous
             if(modelo.urlFoto){
                 const pathImage = path.join(__dirname, '../images', carpeta, modelo.urlFoto);
                 if(fs.existsSync(pathImage)){
