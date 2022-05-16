@@ -38,20 +38,7 @@ class UsuariosControllers {
                 res.status(500).json(err);
             });
     }
-
-    static uploadImage = async (req: any, res: Response) => {
-        if (!req.files || Object.keys(req.files).length === 0 || !req.files.archivo) {
-            res.status(400).send('No hay imagenes que subir');
-            return;
-        }    
-        try {
-            const nombre = await uploadImageServer(req.files, 'users')
-            res.status(200).json({nombre})
-        } catch (msg) {
-            res.status(400).json({msg})
-        }
-    }
-
+    
     static putUsuario = async (req: Request, res: Response) => {
 
         const { id } = req.params;

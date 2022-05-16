@@ -14,8 +14,6 @@ router.get('/:id', [
 
 router.post('/', UsuariosControllers.postUsuario);
 
-router.post('/image', UsuariosControllers.uploadImage);
-
 router.put('/:id', [
     validateJWT,
 ], UsuariosControllers.putUsuario);
