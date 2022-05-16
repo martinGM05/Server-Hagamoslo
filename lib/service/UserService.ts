@@ -38,33 +38,31 @@ class UserService{
         })
     }
 
-    static authenticateUser(correo: string, contrasena: string){
-        return prisma.usuario.findUnique({
-            where: { correo }
-        }).then(async user => {
-            
-                if(bcrypt.compareSync(contrasena, user?.contrasena)){
-                    const userForToken = {
-                        id: user!.id,
-                        correo: user!.correo,
-                        nombre: user!.nombre,
-                        urlFoto: user!.urlFoto,
-                        numero: user!.numero,
-                        idRol: user!.idRol,
-                    }
-                    const token = await generateJWT(userForToken)
-                    return {
-                        user,
-                        token
-                    }
-                }else{
-                    return {
-                        message: 'Contraseña incorrecta'
-                    }
-                }
-        }).catch(err => {
-            return null
-        })
+    static authenticateUser = async (correo: string, contrasena: string) => {
+        const user = await prisma.usuario.findUnique({ where: { correo } })
+        
+        if (!user) return { message: 'Usuario no encontrado' }
+        
+        if (!bcrypt.compareSync(contrasena, user.contrasena)) {
+            return {
+                message: 'Algún dato es incorrecto'
+            }
+        }
+
+        const userForToken = {
+            id: user!.id,
+            correo: user!.correo,
+            nombre: user!.nombre,
+            urlFoto: user!.urlFoto,
+            numero: user!.numero,
+            idRol: user!.idRol,
+        }
+
+        const token = await generateJWT(userForToken)
+        return {
+            token,
+            user: userForToken
+        }
     }
 
     static changeRoleClient(idUser: number, idRol:number){
