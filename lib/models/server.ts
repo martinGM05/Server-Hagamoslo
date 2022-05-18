@@ -5,6 +5,7 @@ import workerRoutes from "../routes/workers";
 import tagRoutes from "../routes/tag";
 import hiredRoutes from "../routes/hired";
 import uploadRoutes from "../routes/uploads";
+import salaRoutes from "../routes/sala";
 import cors from 'cors';
 import fileUpload from "express-fileupload";
 
@@ -20,6 +21,7 @@ class Server {
         tag: '/api/service',
         hired: '/api/hired',
         upload: '/api/upload',
+        sala: '/api/salas',
     }
 
     constructor() {
@@ -49,6 +51,7 @@ class Server {
         this.app.use(this.apiPaths.tag, tagRoutes)
         this.app.use(this.apiPaths.hired, hiredRoutes)
         this.app.use(this.apiPaths.upload, uploadRoutes)
+        this.app.use(this.apiPaths.sala, salaRoutes)
     }
 
     listen(){
