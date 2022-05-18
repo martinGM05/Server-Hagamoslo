@@ -3,10 +3,17 @@ const prisma = new PrismaClient()
 
 class SalaService {
 
-    static async createSala(idSala: string, idUsuario: number) {
-        return prisma.sala.create({
-            data: { idSala, idUsuario }
+    static async createSala(idSala: string, idUsuario: number, idTrabajador: number) {
+        await prisma.sala.createMany({
+            data: [
+                { idSala, idUsuario,},
+                { idSala, idUsuario: idTrabajador }
+            ]
         })
+
+        return {
+            msg: 'Sala creada'
+        }
     }
 
     static async getSalasByIdUser(idUsuario: number) {
@@ -17,15 +24,23 @@ class SalaService {
 
     static async deleteSala(idSala: string) {
     
-        const idSal = await prisma.sala.findFirst({
+        const idSal = await prisma.sala.findMany({
             where: { idSala }
         })
 
-        let id = idSal?.id
+        if (idSal) {
+            await prisma.sala.deleteMany({
+                where: { idSala }
+            })
+            return {
+                msg: 'Sala eliminada'
+            }
+        }else{
+            return {
+                msg: 'No se pudo eliminar la sala'
+            }
+        }
 
-        return prisma.sala.delete({
-            where: { id }
-        })
 
     }
 

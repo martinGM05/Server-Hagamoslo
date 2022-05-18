@@ -4,8 +4,8 @@ import SalaService from "../service/SalaService";
 
 export const createSala = async (req: Request, res: Response) => {
     
-    const { idSala, idUsuario } = req.body;
-    const sala = await SalaService.createSala(idSala, idUsuario);
+    const { idSala, idUsuario, idTrabajador } = req.body;
+    const sala = await SalaService.createSala(idSala, idUsuario, idTrabajador);
     if (sala) {
         res.status(200).json(sala)
     }else{
