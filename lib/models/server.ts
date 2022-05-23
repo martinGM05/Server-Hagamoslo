@@ -6,6 +6,8 @@ import tagRoutes from "../routes/tag";
 import hiredRoutes from "../routes/hired";
 import uploadRoutes from "../routes/uploads";
 import salaRoutes from "../routes/sala";
+import blogRoutes from "../routes/blog";
+import comentarioBlogRoutes from "../routes/comentarioBlog";
 import cors from 'cors';
 import fileUpload from "express-fileupload";
 
@@ -22,6 +24,8 @@ class Server {
         hired: '/api/hired',
         upload: '/api/upload',
         sala: '/api/salas',
+        blog: '/api/blog',
+        comentarioBlog: '/api/comentarioBlog',
     }
 
     constructor() {
@@ -52,6 +56,8 @@ class Server {
         this.app.use(this.apiPaths.hired, hiredRoutes)
         this.app.use(this.apiPaths.upload, uploadRoutes)
         this.app.use(this.apiPaths.sala, salaRoutes)
+        this.app.use(this.apiPaths.blog, blogRoutes)
+        this.app.use(this.apiPaths.comentarioBlog, comentarioBlogRoutes)
     }
 
     listen(){

@@ -1,6 +1,15 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+interface ServicioContratado {
+    idUsuario: number
+    idTrabajador: number
+    descripcion: string
+    fechaInicio?: string
+    fechaFin?: string
+    estado: boolean
+    costo: number
+}
 
 const getServiceHired = async (idUser: number, estado: boolean) => {
 
@@ -23,6 +32,13 @@ const getServiceHired = async (idUser: number, estado: boolean) => {
     })
 }
 
+const createServiceHired = async (servicioContratado: ServicioContratado) => {
+    return prisma.servicioContratado.create({
+        data: servicioContratado
+    })
+}
+
 export {
     getServiceHired,
+    createServiceHired
 }

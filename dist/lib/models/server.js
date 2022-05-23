@@ -11,6 +11,8 @@ const tag_1 = __importDefault(require("../routes/tag"));
 const hired_1 = __importDefault(require("../routes/hired"));
 const uploads_1 = __importDefault(require("../routes/uploads"));
 const sala_1 = __importDefault(require("../routes/sala"));
+const blog_1 = __importDefault(require("../routes/blog"));
+const comentarioBlog_1 = __importDefault(require("../routes/comentarioBlog"));
 const cors_1 = __importDefault(require("cors"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 class Server {
@@ -23,6 +25,8 @@ class Server {
             hired: '/api/hired',
             upload: '/api/upload',
             sala: '/api/salas',
+            blog: '/api/blog',
+            comentarioBlog: '/api/comentarioBlog',
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8000';
@@ -47,6 +51,8 @@ class Server {
         this.app.use(this.apiPaths.hired, hired_1.default);
         this.app.use(this.apiPaths.upload, uploads_1.default);
         this.app.use(this.apiPaths.sala, sala_1.default);
+        this.app.use(this.apiPaths.blog, blog_1.default);
+        this.app.use(this.apiPaths.comentarioBlog, comentarioBlog_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {
