@@ -23,7 +23,8 @@ model Usuario{
   contrasena    String
   urlFoto       String
   numero        String
-  localizacion  String
+  latitud       String
+  longitud      String
   idRol         Int
   Rol           Roles       @relation(fields: [idRol], references: [id])
   descripcion   String?     @default("")

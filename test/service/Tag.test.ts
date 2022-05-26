@@ -71,7 +71,8 @@ describe('Test for Tag service', () => {
                 id: worker.id,
                 nombre: worker.nombre,
                 urlFoto: worker.urlFoto,
-                localizacion: worker.localizacion,
+                latitud: worker.latitud,
+                longitud: worker.longitud,
                 descripcion: worker.descripcion,
                 valoracion: worker.valoracion, 
                 tags: worker.tags.map(tag => tag.tag.nombre) 

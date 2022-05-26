@@ -14,7 +14,8 @@ const getWorkerByTag = async (idTag: number) => {
             id: worker.id,
             nombre: worker.nombre,
             urlFoto: worker.urlFoto,
-            localizacion: worker.localizacion,
+            latidud: worker.latitud,
+            longitud: worker.longitud,
             descripcion: worker.descripcion,
             valoracion: worker.valoracion, 
             tags: worker.tags.map(tag => tag.tag.nombre) 

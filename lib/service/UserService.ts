@@ -30,7 +30,8 @@ class UserService{
                 correo: user?.correo,
                 urlFoto: user?.urlFoto,
                 numero: user?.numero,
-                localizacion: user?.localizacion,
+                latitud: user?.latitud,
+                longitud: user?.longitud,
                 idRol: user?.idRol,
                 descripcion: user?.descripcion,
                 valoracion: user?.valoracion

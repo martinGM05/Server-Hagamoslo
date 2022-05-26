@@ -56,7 +56,8 @@ const getAllWorkersAndClients = () => {
                 nombre: user.nombre,
                 correo: user.correo,
                 numero: user.numero,
-                localizacion: user.localizacion,
+                latitud: user.latitud,
+                longitud: user.longitud,
                 descripcion: user.descripcion,
                 valoracion: user.valoracion,
                 tags: user.tags.map(tag => tag.tag.nombre)
