@@ -42,18 +42,24 @@ const getAllWorkersAndClients = () => {
 
     return prisma.usuario.findMany({
         where: { idRol: { in: [2, 3] } },
+        include: {
+            tags: {
+                include: {
+                    tag: true
+                }
+            }
+        },
     }).then(users => {
         return users.map(user => {
             return {
                 id: user.id,
                 nombre: user.nombre,
                 correo: user.correo,
-                urlFoto: user.urlFoto,
                 numero: user.numero,
                 localizacion: user.localizacion,
-                idRol: user.idRol,
                 descripcion: user.descripcion,
-                valoracion: user.valoracion
+                valoracion: user.valoracion,
+                tags: user.tags.map(tag => tag.tag.nombre)
             }
         })
     })
