@@ -30,8 +30,21 @@ class SalaService {
     }
 
     static async getSalasByIdUser(idUsuario: number) {
-        return prisma.sala.findMany({
-            where: { idUsuario }
+
+        return await prisma.sala.findMany({
+            where: { idUsuario },
+            select: {
+                idSala: true,
+                idUsuario: true,
+                Receptor: {
+                    select: {
+                        id: true,
+                        nombre: true,
+                        descripcion: true,
+                        numero: true,
+                    }
+                }
+            }
         })
     }
 

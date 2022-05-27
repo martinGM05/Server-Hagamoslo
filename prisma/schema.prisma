@@ -17,28 +17,36 @@ model Roles{
 }
 
 model Usuario{
-  id            Int         @id @default(autoincrement())
-  nombre        String
-  correo        String      @unique
-  contrasena    String
-  urlFoto       String
-  numero        String
-  latitud       Float
-  longitud      Float
-  idRol         Int
-  Rol           Roles       @relation(fields: [idRol], references: [id])
-  descripcion   String?     @default("")
-  valoracion    Int?        @default(0)
-  tags          Servicio[]
-  comentarioUsuario  ComentarioUsuario[]
-  Contratado    ServicioContratado[] @relation("Trabajador")
-  Solicitante   ServicioContratado? @relation("Usuario")
-  Blog           Blog[]
-  ComentarioBlog ComentarioBlog[]
-  // salas         Sala[] @relation("Usuario")
-  // salasReceptor Sala? @relation("Receptor")
+  id                  Int         @id @default(autoincrement())
+  nombre              String
+  correo              String      @unique
+  contrasena          String
+  urlFoto             String
+  numero              String
+  latitud             Float
+  longitud            Float
+  idRol               Int
+  Rol                 Roles       @relation(fields: [idRol], references: [id])
+  descripcion         String?     @default("")
+  valoracion          Int?        @default(0)
+  tags                Servicio[]
+  comentarioUsuario   ComentarioUsuario[]
+  Contratado          ServicioContratado[] @relation("Trabajador")
+  Solicitante         ServicioContratado? @relation("Usuario")
+  Blog                Blog[]
+  ComentarioBlog      ComentarioBlog[]
+  Salas               Sala?  @relation("UsuarioSala")
+  Receptor            Sala[] @relation("ReceptorSala")
 }
 
+model Sala{
+  id            Int         @id @default(autoincrement())
+  idSala        String
+  idUsuario     Int
+  Usuario       Usuario     @relation(name:"UsuarioSala", fields: [idUsuario], references: [id])
+  idReceptor    Int
+  Receptor      Usuario     @relation(name:"ReceptorSala", fields: [idReceptor], references: [id])
+}
 
 model ServicioContratado{
   id            Int         @id @default(autoincrement())
@@ -53,14 +61,7 @@ model ServicioContratado{
   costo         Float
 }
 
-model Sala{
-  id            Int         @id @default(autoincrement())
-  idSala        String
-  idUsuario     Int
-  idReceptor    Int
-  // Usuario       Usuario     @relation(name:"Usuario", fields: [idUsuario], references: [id])
-  // Receptor      Usuario     @relation(name:"Receptor", fields: [idReceptor], references: [id])
-}
+
 
 model Blog{
   id            Int         @id @default(autoincrement())
