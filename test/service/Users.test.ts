@@ -12,8 +12,8 @@ describe('Test for User service', () => {
             correo: 'ivan@gmail.com',
             contrasena: '123456',
             urlFoto: '',
-            latitud: '',
-            longitud: '',
+            latitud: 0,
+            longitud: 0,
             numero: '2311434214',
             idRol: 1,
 
