@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getServices, getWorkesByTag } from '../controller/TagController';
+import { getServices, getWorkesByTag, postAssignment } from '../controller/TagController';
 import validateJWT from '../middlewares/ValidateJWT';
 
 const router = Router();
@@ -11,6 +11,10 @@ router.get('/', [
 router.get('/:idTag', [
     validateJWT,
 ], getWorkesByTag);
+
+router.post('/', [
+    validateJWT,
+], postAssignment)
 
 
 export default router;

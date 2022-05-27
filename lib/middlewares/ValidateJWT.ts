@@ -14,16 +14,7 @@ const validateJWT = (req: Request, res: Response, next: VoidFunction) => {
     }
 
     try {
-        const { id, correo, nombre, urlFoto, numero, idRol  } = jwt.verify(token, process.env.SECRET);
-
-        req.body = {
-            id,
-            correo,
-            nombre,
-            urlFoto,
-            numero,
-            idRol
-        }
+        const response = jwt.verify(token, process.env.SECRET);
 
         next()
     } catch (error) {

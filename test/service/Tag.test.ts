@@ -22,11 +22,11 @@ describe('Test for Tag service', () => {
 
     test('1) Add Tags to Worker', async () => {
         const assigments = [
-            { idUsuario: 6, idTag: 1 },
-            { idUsuario: 6, idTag: 2 },
-            { idUsuario: 5, idTag: 2 },
-            { idUsuario: 5, idTag: 3 },
-            { idUsuario: 6, idTag: 4 },
+            { idUsuario: 3, idTag: 1 },
+            { idUsuario: 3, idTag: 2 },
+            { idUsuario: 4, idTag: 2 },
+            { idUsuario: 4, idTag: 3 },
+            { idUsuario: 3, idTag: 4 },
         ]
 
         await prisma.servicio.createMany({

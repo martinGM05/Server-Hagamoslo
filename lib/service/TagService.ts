@@ -2,6 +2,10 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+export interface Tags {
+    idTag: number,
+}
+
 const getWorkerByTag = async (idTag: number) => {
 
     const workersByTag = await prisma.usuario.findMany({            
@@ -27,7 +31,31 @@ const getAllServices = async () => {
     return await prisma.tag.findMany()
 }
 
+const assignment = async (idUsuario: number, idsTag: number[]) => {
+
+    try {
+        idsTag.forEach(async (idTag) => {
+            let assigment = {
+                idUsuario,
+                idTag,
+            }
+            await prisma.servicio.create({
+                data: assigment
+            })
+        })
+    
+        return {
+            message: 'Servicio asignado'
+        }
+    } catch (error) {
+        return {
+            message: 'Error al asignar el servicio'
+        }
+    }
+}
+
 export {
     getWorkerByTag,
-    getAllServices
+    getAllServices,
+    assignment
 }
