@@ -34,6 +34,7 @@ class SalaService {
         return await prisma.sala.findMany({
             where: { idUsuario },
             select: {
+                id: true,
                 idSala: true,
                 idUsuario: true,
                 Receptor: {
