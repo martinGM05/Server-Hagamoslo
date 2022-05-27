@@ -5,8 +5,8 @@ interface User{
     contrasena: string
     urlFoto: string
     numero: string
-    latitud: string
-    longitud: string
+    latitud: number
+    longitud: number
     idRol: number
     descripcion?: string
     valoracion?: number 

@@ -9,10 +9,10 @@ describe('Test for Tag service', () => {
             
         const tags = await prisma.tag.createMany({
             data: [
-                { nombre: 'Carpintero', icono: 'carpintero-svg'},
-                { nombre: 'Electricista', icono: 'electricista-svg'},
-                { nombre: 'Mecanico', icono: 'mecanico-svg'},
-                { nombre: 'Pintor', icono: 'pintor-svg'},
+                { nombre: 'Carpintero', icono: 'hammer-outline'},
+                { nombre: 'Electricista', icono: 'flash-outline'},
+                { nombre: 'Mecanico', icono: 'analytics-outlineg'},
+                { nombre: 'Pintor', icono: 'star-outline'},
             ]
         })    
         
@@ -24,8 +24,8 @@ describe('Test for Tag service', () => {
         const assigments = [
             { idUsuario: 6, idTag: 1 },
             { idUsuario: 6, idTag: 2 },
-            { idUsuario: 7, idTag: 2 },
-            { idUsuario: 7, idTag: 3 },
+            { idUsuario: 5, idTag: 2 },
+            { idUsuario: 5, idTag: 3 },
             { idUsuario: 6, idTag: 4 },
         ]
 

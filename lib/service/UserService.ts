@@ -8,12 +8,41 @@ const prisma = new PrismaClient()
 class UserService{
 
     static createUser = async(user: User) => {
-        return prisma.usuario.create({
-            data: {
-                ...user,
-                contrasena: bcrypt.hashSync(user.contrasena, 9)
+
+        const existe = await prisma.usuario.findUnique({
+            where: {
+                correo: user.correo
             }
         })
+
+        try {
+            if(existe){
+                return {
+                    message: 'El correo ya existe'
+                }
+            }else{
+                const usuario =  await prisma.usuario.create({
+                    data: {
+                        ...user,
+                        contrasena: bcrypt.hashSync(user.contrasena, 9)
+                    }
+                })
+
+                if(usuario){
+                    return usuario
+                }else{
+                    return {
+                        message: 'No se pudo crear el usuario'
+                    }
+                }
+
+            }   
+        } catch (error) {
+            return {
+                message: 'Error al crear el usuario: ' + error
+            }
+        }
+        
     }    
 
     static getAllUsers(){
