@@ -11,7 +11,7 @@ describe('Test for Tag service', () => {
             data: [
                 { nombre: 'Carpintero', icono: 'hammer-outline'},
                 { nombre: 'Electricista', icono: 'flash-outline'},
-                { nombre: 'Mecanico', icono: 'analytics-outlineg'},
+                { nombre: 'Mecanico', icono: 'analytics-outline'},
                 { nombre: 'Pintor', icono: 'star-outline'},
             ]
         })    
@@ -22,11 +22,11 @@ describe('Test for Tag service', () => {
 
     test('1) Add Tags to Worker', async () => {
         const assigments = [
-            { idUsuario: 3, idTag: 1 },
+            { idUsuario: 2, idTag: 1 },
+            { idUsuario: 2, idTag: 2 },
             { idUsuario: 3, idTag: 2 },
-            { idUsuario: 4, idTag: 2 },
-            { idUsuario: 4, idTag: 3 },
-            { idUsuario: 3, idTag: 4 },
+            { idUsuario: 3, idTag: 3 },
+            { idUsuario: 2, idTag: 4 },
         ]
 
         await prisma.servicio.createMany({

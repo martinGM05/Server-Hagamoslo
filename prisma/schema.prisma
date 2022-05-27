@@ -35,14 +35,31 @@ model Usuario{
   Solicitante   ServicioContratado? @relation("Usuario")
   Blog           Blog[]
   ComentarioBlog ComentarioBlog[]
-  salas         Sala[]
+  // salas         Sala[] @relation("Usuario")
+  // salasReceptor Sala? @relation("Receptor")
+}
+
+
+model ServicioContratado{
+  id            Int         @id @default(autoincrement())
+  idUsuario     Int
+  Usuario       Usuario     @relation(name:"Usuario", fields: [idUsuario], references: [id])
+  idTrabajador  Int
+  Trabajador    Usuario     @relation(name:"Trabajador", fields: [idTrabajador], references: [id])
+  descripcion   String      @db.VarChar(100)
+  fechaInicio   DateTime    @default(now()) @db.Date
+  fechaFin      DateTime    @updatedAt @db.Date
+  estado        Boolean     @default(true)
+  costo         Float
 }
 
 model Sala{
   id            Int         @id @default(autoincrement())
   idSala        String
   idUsuario     Int
-  Usuario       Usuario     @relation(fields: [idUsuario], references: [id])
+  idReceptor    Int
+  // Usuario       Usuario     @relation(name:"Usuario", fields: [idUsuario], references: [id])
+  // Receptor      Usuario     @relation(name:"Receptor", fields: [idReceptor], references: [id])
 }
 
 model Blog{
@@ -63,6 +80,7 @@ model ComentarioBlog{
   Usuario       Usuario     @relation(fields: [idTrabajador], references: [id])
 }
 
+
 model Comentario{
   id            Int         @id @default(autoincrement())
   comentario    Json
@@ -78,18 +96,7 @@ model ComentarioUsuario{
   @@id([idUsuario, idComentario])
 }
 
-model ServicioContratado{
-  id            Int         @id @default(autoincrement())
-  idUsuario     Int
-  Usuario       Usuario     @relation(name:"Usuario", fields: [idUsuario], references: [id])
-  idTrabajador  Int
-  Trabajador    Usuario     @relation(name:"Trabajador", fields: [idTrabajador], references: [id])
-  descripcion   String      @db.VarChar(100)
-  fechaInicio   DateTime    @default(now()) @db.Date
-  fechaFin      DateTime    @updatedAt @db.Date
-  estado        Boolean     @default(true)
-  costo         Float
-}
+
 
 
 model Servicio{

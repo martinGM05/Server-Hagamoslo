@@ -1,13 +1,26 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+interface Sala {
+    id: number;
+    idSala: string;
+    idTrabajador: number;
+    nombreTrabajador: string;
+}
+
+// interface SalaResponse {
+//     sala: Sala[];
+// }
+
+
+let response: Sala[] = []
 class SalaService {
 
     static async createSala(idSala: string, idUsuario: number, idTrabajador: number) {
         await prisma.sala.createMany({
             data: [
-                { idSala, idUsuario,},
-                { idSala, idUsuario: idTrabajador }
+                { idSala, idUsuario, idReceptor: idTrabajador },
+                { idSala, idUsuario: idTrabajador, idReceptor: idUsuario }
             ]
         })
 
