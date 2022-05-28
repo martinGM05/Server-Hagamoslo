@@ -27,6 +27,19 @@ class UsuariosControllers {
         }
     }
 
+    static postTokenFCM = async (req: Request, res: Response) => {
+        const { idUser } = req.params;
+        const { tokenFCM } = req.body;
+        const user = await UserService.postTokenFCM(Number(idUser), tokenFCM);
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({
+                message: 'Usuario no encontrado'
+            });
+        }
+    }
+
     static postUsuario = async (req: Request, res: Response) => {
 
         const { body } = req;

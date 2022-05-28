@@ -25,6 +25,7 @@ model Usuario{
   numero              String
   latitud             Float
   longitud            Float
+  tokenFCM            String      @default("")
   idRol               Int
   Rol                 Roles       @relation(fields: [idRol], references: [id])
   descripcion         String?     @default("")

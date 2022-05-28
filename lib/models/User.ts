@@ -8,6 +8,7 @@ interface User{
     latitud: number
     longitud: number
     idRol: number
+    tokenFCM: string
     descripcion?: string
     valoracion?: number 
 }

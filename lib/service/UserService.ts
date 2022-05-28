@@ -62,8 +62,20 @@ class UserService{
                 latitud: user?.latitud,
                 longitud: user?.longitud,
                 idRol: user?.idRol,
+                tokenFCM: user?.tokenFCM,
                 descripcion: user?.descripcion,
                 valoracion: user?.valoracion
+            }
+        })
+    }
+
+    static postTokenFCM = async(id: number, tokenFCM: string) => {
+        return prisma.usuario.update({
+            where: { id: id },
+            data: { tokenFCM }
+        }).then(user => {
+            return {
+                message: 'Se actualizó el tokenFCM'
             }
         })
     }
@@ -86,6 +98,7 @@ class UserService{
             urlFoto: user!.urlFoto,
             numero: user!.numero,
             idRol: user!.idRol,
+            tokenFCM: user!.tokenFCM,
         }
 
         const token = await generateJWT(userForToken)

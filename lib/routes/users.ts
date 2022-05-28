@@ -14,6 +14,8 @@ router.get('/:id', [
 
 router.post('/', UsuariosControllers.postUsuario);
 
+router.post('/:idUser', UsuariosControllers.postTokenFCM);
+
 router.put('/:id', [
     validateJWT,
 ], UsuariosControllers.putUsuario);

@@ -7,6 +7,7 @@ export interface UserToken{
     urlFoto: string;
     numero: string;
     idRol: number;
+    tokenFCM: string;
 }
 
 const generateJWT = (User: UserToken) => {
