@@ -69,7 +69,7 @@ class UsuariosControllers {
         const { idUser } = req.params;
         const { email, password } = req.body;
 
-        const user = await UserService.authenticateUser(email, password);
+        const user = await UserService.authenticateUser(email, password, '');
         if (user) {
             if (user.user?.idRol === 2) {
                 const changeRol = await UserService.changeRoleClient(Number(idUser), 3);

@@ -16,7 +16,7 @@ const changeRoleWorker = async (props: createWorkerProps) => {
 
     const { idUser, email, password, description, valoracion } = props
     
-    const user = await UserService.authenticateUser(email, password);
+    const user = await UserService.authenticateUser(email, password, '');
     // if (user) {
     //     if(user?.user.idRol === 1){
     //         const changeRol = await prisma.usuario.update({
