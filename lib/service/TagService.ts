@@ -34,15 +34,28 @@ const getAllServices = async () => {
 const assignment = async (idUsuario: number, idsTag: number[]) => {
 
     try {
-        idsTag.forEach(async (idTag) => {
-            let assigment = {
-                idUsuario,
-                idTag,
-            }
-            await prisma.servicio.create({
-                data: assigment
-            })
+
+        const result = await prisma.servicio.deleteMany({
+            where: { idUsuario }
         })
+
+        if (result) {
+            const result = await prisma.servicio.createMany({
+                data: idsTag.map(id => ({ idUsuario, idTag: id }))
+            })
+            return result
+        }
+
+
+        // idsTag.forEach(async (idTag) => {
+        //     let assigment = {
+        //         idUsuario,
+        //         idTag,
+        //     }
+        //     await prisma.servicio.create({
+        //         data: assigment
+        //     })
+        // })
     
         return {
             message: 'Servicio asignado'
