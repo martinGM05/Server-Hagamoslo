@@ -59,7 +59,7 @@ const getAllWorkersAndClients = () => {
                 latitud: user.latitud,
                 longitud: user.longitud,
                 descripcion: user.descripcion,
-                tokenFCM: user.tags,
+                tokenFCM: user.tokenFCM,
                 valoracion: user.valoracion,
                 tags: user.tags.map(tag => tag.tag.nombre),
             }
@@ -86,7 +86,7 @@ const getWorkerById = async (idUser: number) => {
         latitud: worker!.latitud,
         longitud: worker!.longitud,
         descripcion: worker!.descripcion,
-        tokenFCM: worker!.tags,
+        tokenFCM: worker!.tokenFCM,
         valoracion: worker!.valoracion,
         tags: worker!.tags.map(tag => tag.tag.nombre),
     }
