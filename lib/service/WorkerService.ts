@@ -59,11 +59,37 @@ const getAllWorkersAndClients = () => {
                 latitud: user.latitud,
                 longitud: user.longitud,
                 descripcion: user.descripcion,
+                tokenFCM: user.tags,
                 valoracion: user.valoracion,
-                tags: user.tags.map(tag => tag.tag.nombre)
+                tags: user.tags.map(tag => tag.tag.nombre),
             }
         })
     })
+}
+
+const getWorkerById = async (idUser: number) => {
+    const worker = await prisma.usuario.findUnique({
+        where: { id: idUser },
+        include: {
+            tags: {
+                include: {
+                    tag: true
+                }
+            }
+        }
+    })
+    return {
+        id: worker!.id,
+        nombre: worker!.nombre,
+        correo: worker!.correo,
+        numero: worker!.numero,
+        latitud: worker!.latitud,
+        longitud: worker!.longitud,
+        descripcion: worker!.descripcion,
+        tokenFCM: worker!.tags,
+        valoracion: worker!.valoracion,
+        tags: worker!.tags.map(tag => tag.tag.nombre),
+    }
 }
 
 const postJoinTagWithWorker = async (idUser: number, idTag: number) => {
@@ -72,5 +98,6 @@ const postJoinTagWithWorker = async (idUser: number, idTag: number) => {
 
 export {
     changeRoleWorker,
-    getAllWorkersAndClients
+    getAllWorkersAndClients,
+    getWorkerById,
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { changeRoleWorker, createWorkerProps, getAllWorkersAndClients } from '../service/WorkerService';
+import { changeRoleWorker, createWorkerProps, getAllWorkersAndClients, getWorkerById } from '../service/WorkerService';
 
 export const getAllUsersClient = async (req: Request, res: Response) => {
     const users = await getAllWorkersAndClients();
@@ -8,6 +8,19 @@ export const getAllUsersClient = async (req: Request, res: Response) => {
     }else{
         res.status(404).json({
             message: 'Error al obtener usuarios'
+        });
+    }
+}
+
+
+export const getWorkerUser = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const user = await getWorkerById(Number(id));
+    if(user){
+        res.status(200).json(user);
+    }else{
+        res.status(404).json({
+            message: 'Error al obtener usuario'
         });
     }
 }
