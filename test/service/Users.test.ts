@@ -38,7 +38,7 @@ describe('Test for User service', () => {
     })
 
     test('Authenticate user', async () => {
-        const user = await UserService.authenticateUser('manuel.gm05@gmail.com', '123456')
+        const user = await UserService.authenticateUser('manuel.gm05@gmail.com', '123456', '')
         // console.log(user)
         expect(user).not.toBeNull()
     })

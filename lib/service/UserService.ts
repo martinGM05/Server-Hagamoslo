@@ -80,7 +80,7 @@ class UserService{
         })
     }
 
-    static authenticateUser = async (correo: string, contrasena: string) => {
+    static authenticateUser = async (correo: string, contrasena: string, tokenFCM: string) => {
         const user = await prisma.usuario.findUnique({ where: { correo } })
         
         if (!user) return { message: 'Usuario no encontrado' }
@@ -91,14 +91,27 @@ class UserService{
             }
         }
 
+        const responseFCM = await prisma.usuario.update({
+            where: { id: user.id },
+            data: { tokenFCM }
+        })
+
+        if(!responseFCM){
+            return {
+                message: 'No se pudo actualizar el tokenFCM'
+            }
+        }
+
+        const dataUser = await prisma.usuario.findUnique({ where: { correo } })
+
         const userForToken = {
-            id: user!.id,
-            correo: user!.correo,
-            nombre: user!.nombre,
-            urlFoto: user!.urlFoto,
-            numero: user!.numero,
-            idRol: user!.idRol,
-            tokenFCM: user!.tokenFCM,
+            id: dataUser!.id,
+            correo: dataUser!.correo,
+            nombre: dataUser!.nombre,
+            urlFoto: dataUser!.urlFoto,
+            numero: dataUser!.numero,
+            idRol: dataUser!.idRol,
+            tokenFCM: dataUser!.tokenFCM,
         }
 
         const token = await generateJWT(userForToken)

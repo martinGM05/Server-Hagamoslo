@@ -3,7 +3,7 @@ import UserService from "../service/UserService";
 
 
 export const authenticateUser = async (req: Request, res: Response) => {
-    const { correo, contrasena } = req.body;
+    const { correo, contrasena, tokenFCM } = req.body;
     try {
 
         if(!correo || !contrasena) {
@@ -11,7 +11,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
                 message: "No se han enviado los datos necesarios"
             });
         }
-        const auth = await UserService.authenticateUser(correo, contrasena);
+        const auth = await UserService.authenticateUser(correo, contrasena, tokenFCM);
         res.status(200).json(auth);
     } catch (error) {
         console.log(error)
