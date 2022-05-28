@@ -14,6 +14,7 @@ describe('Test for User service', () => {
             urlFoto: '',
             latitud: 0,
             longitud: 0,
+            tokenFCM: '',
             numero: '2311434214',
             idRol: 1,
 
