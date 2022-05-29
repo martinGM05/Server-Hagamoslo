@@ -1,9 +1,10 @@
-import {changeRoleWorker, getAllWorkersAndClients } from '../../lib/service/WorkerService'
+import WorkerService from "../../lib/service/WorkerService"
+
 
 describe('Test for Worker service', () => {
 
     test('1) Get all users', async () => {
-        const users = await getAllWorkersAndClients()
+        const users = await WorkerService.getWorkersClients();
         // console.log(users)
         expect(users).not.toEqual([])
     })
