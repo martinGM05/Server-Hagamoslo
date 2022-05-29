@@ -43,6 +43,7 @@ class SalaService {
                         nombre: true,
                         descripcion: true,
                         numero: true,
+                        tokenFCM: true,
                     }
                 }
             }
