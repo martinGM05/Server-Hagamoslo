@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import validateJWT from '../middlewares/ValidateJWT';
-import { getServiceHiredHistory, getServiceHiredInCourse } from '../controller/HiredController';
+import { createServiceHire, getServiceHiredHistory, getServiceHiredInCourse } from '../controller/HiredController';
 
 const router = Router();
 
 router.get('/inCourse/:idUser', [
     // validateJWT,
 ], getServiceHiredInCourse);
+
+router.post('/', createServiceHire);
 
 router.get('/history/:idUser', [
     // validateJWT,

@@ -19,7 +19,7 @@ class SalaService {
     static async createSala(idSala: string, idUsuario: number, idTrabajador: number) {
         await prisma.sala.createMany({
             data: [
-                { idSala, idUsuario, idReceptor: idTrabajador },
+                { idSala, idUsuario: idUsuario, idReceptor: idTrabajador },
                 { idSala, idUsuario: idTrabajador, idReceptor: idUsuario }
             ]
         })
@@ -43,7 +43,6 @@ class SalaService {
                         nombre: true,
                         descripcion: true,
                         numero: true,
-                        tokenFCM: true,
                     }
                 }
             }

@@ -20,22 +20,41 @@ const getServiceHired = async (idUser: number, estado: boolean) => {
 
     return serviciosContradados.map(serviciosContradados => {
         return {
+            id: serviciosContradados.id,
             descripcion: serviciosContradados.descripcion,
             fechaInicio: serviciosContradados.fechaInicio,
             fechaFin: serviciosContradados.fechaFin,
             costo: serviciosContradados.costo,
             trabajador: {
+                idTrabajador: serviciosContradados.Trabajador.id, 
                 nombre: serviciosContradados.Trabajador.nombre,
-                urlFoto: serviciosContradados.Trabajador.urlFoto,
+                tokenFCM: serviciosContradados.Trabajador.tokenFCM,
             }
         }
     })
 }
 
 const createServiceHired = async (servicioContratado: ServicioContratado) => {
-    return prisma.servicioContratado.create({
+    const result = await prisma.servicioContratado.create({
         data: servicioContratado
     })
+
+    try {
+        if(result) {
+            return {
+                msg: 'Servicio contratado'
+            }
+        }else{
+            return {
+                msg: 'Error al contratar el servicio'
+            }
+        }
+    } catch (error) {
+        return {
+            msg: 'Error: ' + error
+        }
+    }
+
 }
 
 export {
