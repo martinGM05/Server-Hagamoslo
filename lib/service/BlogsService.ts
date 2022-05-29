@@ -23,6 +23,7 @@ class BlogsService{
                     id: user?.id,
                     nombre: user?.nombre,
                     correo: user?.correo,
+                    tokenFCM: user?.tokenFCM
                 }
             }
         }))
