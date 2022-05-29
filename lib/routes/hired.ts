@@ -1,18 +1,19 @@
 import { Router } from 'express';
 import validateJWT from '../middlewares/ValidateJWT';
-import { createServiceHire, getServiceHiredHistory, getServiceHiredInCourse } from '../controller/HiredController';
+import HiredController from '../controller/HiredController';
 
 const router = Router();
 
-router.get('/inCourse/:idUser', [
-    // validateJWT,
-], getServiceHiredInCourse);
+// Hire a service
+router.post('/', HiredController.createServiceHired);
 
-router.post('/', createServiceHire);
+// Update the status of a service
+router.put('/:idServiceHired', HiredController.updateStatusService);
 
-router.get('/history/:idUser', [
-    // validateJWT,
-], getServiceHiredHistory);
+// Get services depending on the status
+router.get('/:idUser/:status', HiredController.getServiceHired);
+
+
 
 
 export default router;

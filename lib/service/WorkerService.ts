@@ -6,98 +6,89 @@ const prisma = new PrismaClient()
 export interface createWorkerProps {
     idUser: number, 
     description: string, 
-    valoracion: number, 
-    email: string, 
-    password: string
+    valoracion: number
 }
 
+class WorkerService {
 
-const changeRoleWorker = async (props: createWorkerProps) => {
+    static async getWorkersClients() {
+        return prisma.usuario.findMany({
+            where: { idRol: { in: [2, 3] } },
+            include: {
+                tags: {
+                    include: {
+                        tag: true
+                    }
+                }
+            },
+        }).then(users => {
+            return users.map(user => {
+                return {
+                    id: user.id,
+                    nombre: user.nombre,
+                    correo: user.correo,
+                    numero: user.numero,
+                    latitud: user.latitud,
+                    longitud: user.longitud,
+                    descripcion: user.descripcion,
+                    tokenFCM: user.tokenFCM,
+                    valoracion: user.valoracion,
+                    tags: user.tags.map(tag => tag.tag.nombre),
+                }
+            })
+        })
+    }
 
-    const { idUser, email, password, description, valoracion } = props
-    
-    const user = await UserService.authenticateUser(email, password, '');
-    // if (user) {
-    //     if(user?.user.idRol === 1){
-    //         const changeRol = await prisma.usuario.update({
-    //             where: { id: idUser },
-    //             data: { idRol: 3, descripcion: description, valoracion }
-    //         })
-    //         if (changeRol) {
-    //             return {
-    //                 message: 'Se cambió el rol del usuario'
-    //             }
-    //         }else{
-    //             return 'Error al cambiar rol'
-    //         }
-    //     }else if(user?.user.idRol === 2){
-    //         return 'El usuario ya es un trabajador'
-    //     }else if(user?.user.idRol === 3){
-    //         return 'El usuario es un cliente y trabajador'
-    //     }
-    // }
-}
-
-const getAllWorkersAndClients = () => {
-
-    return prisma.usuario.findMany({
-        where: { idRol: { in: [2, 3] } },
-        include: {
-            tags: {
-                include: {
-                    tag: true
+    static async getWorkerById(idUser: number) {
+        const worker = await prisma.usuario.findUnique({
+            where: { id: idUser },
+            include: {
+                tags: {
+                    include: {
+                        tag: true
+                    }
                 }
             }
-        },
-    }).then(users => {
-        return users.map(user => {
-            return {
-                id: user.id,
-                nombre: user.nombre,
-                correo: user.correo,
-                numero: user.numero,
-                latitud: user.latitud,
-                longitud: user.longitud,
-                descripcion: user.descripcion,
-                tokenFCM: user.tokenFCM,
-                valoracion: user.valoracion,
-                tags: user.tags.map(tag => tag.tag.nombre),
-            }
         })
-    })
-}
+        return {
+            id: worker!.id,
+            nombre: worker!.nombre,
+            correo: worker!.correo,
+            numero: worker!.numero,
+            latitud: worker!.latitud,
+            longitud: worker!.longitud,
+            descripcion: worker!.descripcion,
+            tokenFCM: worker!.tokenFCM,
+            valoracion: worker!.valoracion,
+            tags: worker!.tags.map(tag => tag.tag.nombre),
+        }
+    }
 
-const getWorkerById = async (idUser: number) => {
-    const worker = await prisma.usuario.findUnique({
-        where: { id: idUser },
-        include: {
-            tags: {
-                include: {
-                    tag: true
+    static async changeRole(props: createWorkerProps){
+        const { idUser, description, valoracion } = props
+    
+        const user = await UserService.getUserById(idUser)
+        if(user){
+            if(user.idRol === 1){
+                return prisma.usuario.update({
+                    where: { id: idUser },
+                    data: {
+                        idRol: 3,
+                        descripcion: description,
+                        valoracion: valoracion
+                    }
+                })
+            }else if(user.idRol === 2){
+                return {
+                    msg: 'El usuario ya es un trabajador'
+                }
+            }else if(user.idRol === 3){
+                return {
+                    msg: 'El usuario ya es un cliente y trabajador'
                 }
             }
         }
-    })
-    return {
-        id: worker!.id,
-        nombre: worker!.nombre,
-        correo: worker!.correo,
-        numero: worker!.numero,
-        latitud: worker!.latitud,
-        longitud: worker!.longitud,
-        descripcion: worker!.descripcion,
-        tokenFCM: worker!.tokenFCM,
-        valoracion: worker!.valoracion,
-        tags: worker!.tags.map(tag => tag.tag.nombre),
     }
 }
 
-const postJoinTagWithWorker = async (idUser: number, idTag: number) => {
-    
-}
-
-export {
-    changeRoleWorker,
-    getAllWorkersAndClients,
-    getWorkerById,
-}
+export default WorkerService

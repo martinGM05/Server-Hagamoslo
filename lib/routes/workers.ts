@@ -1,19 +1,12 @@
 import { Router } from 'express';
-import { getAllUsersClient, getWorkerUser, putRoleWorker } from '../controller/WorkerControllers';
-import validateJWT from '../middlewares/ValidateJWT';
+import WorkerController from '../controller/WorkerControllers';
 
 const router = Router();
 
-router.get('/', [
-    // validateJWT,
-],getAllUsersClient);
+router.get('/', WorkerController.getWorkersClients);
 
-router.get('/:id', [
-    // validateJWT,
-], getWorkerUser);
+router.get('/:id', WorkerController.getWokerUser);
 
-router.put('/:idUser', [
-    // validateJWT,
-],putRoleWorker);
+router.put('/:idUser', WorkerController.changeRoleWorker);
 
 export default router;

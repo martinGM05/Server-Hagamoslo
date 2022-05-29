@@ -69,9 +69,9 @@ class UsuariosControllers {
         const { idUser } = req.params;
         const { email, password } = req.body;
 
-        const user = await UserService.authenticateUser(email, password, '');
+        const user = await UserService.getUserById(Number(idUser));
         if (user) {
-            if (user.user?.idRol === 2) {
+            if (user.idRol === 2) {
                 const changeRol = await UserService.changeRoleClient(Number(idUser), 3);
                 if (changeRol) {
                     res.status(200).json(changeRol);
@@ -80,11 +80,11 @@ class UsuariosControllers {
                         message: 'Error al cambiar rol'
                     });
                 }
-            } else if (user.user?.idRol === 1) {
+            } else if (user.idRol === 1) {
                 res.status(200).json({
                     message: 'El usuario ya es un cliente'
                 });
-            } else if (user.user?.idRol === 3) {
+            } else if (user.idRol === 3) {
                 res.status(200).json({
                     message: 'El usuario es un cliente y trabajador'
                 })

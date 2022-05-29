@@ -34,6 +34,29 @@ const getServiceHired = async (idUser: number, estado: boolean) => {
     })
 }
 
+const updateStatusService = async (idServicio: number, estado: boolean) => {
+    const result = await prisma.servicioContratado.update({
+        where: { id: idServicio },
+        data: { estado }
+    })
+
+    try {
+        if(result) {
+            return {
+                msg: 'Estado del servicio actualizado'
+            }
+        }else{
+            return {
+                msg: 'Error al actualizar el estado del servicio'
+            }
+        }
+    } catch (error) {
+        return {
+            msg: 'Error: ' + error
+        }
+    }
+}
+
 const createServiceHired = async (servicioContratado: ServicioContratado) => {
     const result = await prisma.servicioContratado.create({
         data: servicioContratado
@@ -59,5 +82,6 @@ const createServiceHired = async (servicioContratado: ServicioContratado) => {
 
 export {
     getServiceHired,
-    createServiceHired
+    createServiceHired,
+    updateStatusService,
 }
