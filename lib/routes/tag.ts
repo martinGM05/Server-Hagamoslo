@@ -5,15 +5,15 @@ import validateJWT from '../middlewares/ValidateJWT';
 const router = Router();
 
 router.get('/', [
-    validateJWT,
+    // validateJWT,
 ], getServices);
 
 router.get('/:idTag', [
-    validateJWT,
+    // validateJWT,
 ], getWorkesByTag);
 
 router.post('/', [
-    validateJWT,
+    // validateJWT,
 ], postAssignment)
 
 

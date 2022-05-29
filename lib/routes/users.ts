@@ -9,7 +9,7 @@ router.get('/', [
 ], UsuariosControllers.getUsers);
 
 router.get('/:id', [
-    validateJWT,
+    // validateJWT,
 ], UsuariosControllers.getUsuario);
 
 router.post('/', UsuariosControllers.postUsuario);
@@ -17,7 +17,7 @@ router.post('/', UsuariosControllers.postUsuario);
 router.post('/:idUser', UsuariosControllers.postTokenFCM);
 
 router.put('/:id', [
-    validateJWT,
+    // validateJWT,
 ], UsuariosControllers.putUsuario);
 
 export default router;

@@ -43,9 +43,19 @@ class BlogsService{
     }
 
     static deleteBlog = async (id: number) => {
-        return prisma.blog.delete({
-            where: { id }
+
+        const response = await prisma.comentarioBlog.deleteMany({
+            where: { idBlog: id }
         })
+
+        if(response){
+            await prisma.blog.delete({
+                where: { id }
+            })
+            return {
+                msg: 'Blog eliminado'
+            }
+        }
     }
 
 }

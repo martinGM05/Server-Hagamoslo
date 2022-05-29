@@ -5,11 +5,11 @@ import { getServiceHiredHistory, getServiceHiredInCourse } from '../controller/H
 const router = Router();
 
 router.get('/inCourse/:idUser', [
-    validateJWT,
+    // validateJWT,
 ], getServiceHiredInCourse);
 
 router.get('/history/:idUser', [
-    validateJWT,
+    // validateJWT,
 ], getServiceHiredHistory);
 
 

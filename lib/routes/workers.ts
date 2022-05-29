@@ -5,15 +5,15 @@ import validateJWT from '../middlewares/ValidateJWT';
 const router = Router();
 
 router.get('/', [
-    validateJWT,
+    // validateJWT,
 ],getAllUsersClient);
 
 router.get('/:id', [
-    validateJWT,
+    // validateJWT,
 ], getWorkerUser);
 
 router.put('/:idUser', [
-    validateJWT,
+    // validateJWT,
 ],putRoleWorker);
 
 export default router;
