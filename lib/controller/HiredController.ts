@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getServiceHired, createServiceHired, updateStatusService } from "../service/Hired";
+import { getServiceHired, createServiceHired, updateStatusService, getServiceWorkerHired } from "../service/Hired";
 
 
 class HiredController {
@@ -9,6 +9,19 @@ class HiredController {
         const statusCast = status === 'true' ? true : false;
         const services = await getServiceHired(Number(idUser), statusCast);
         if (services.length > 0) {
+            res.status(200).json(services);
+        } else {
+            res.status(204).json({
+                msg: 'No hay servicios contratados'
+            });
+        }
+    }
+
+    static async getServiceWorkerHired(req: Request, res: Response) {
+        const { idWorker, status } = req.params;
+        const statusCast = status === 'true' ? true : false;
+        const services = await getServiceWorkerHired(Number(idWorker), statusCast);
+        if (services) {
             res.status(200).json(services);
         } else {
             res.status(204).json({

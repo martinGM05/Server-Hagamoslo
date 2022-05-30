@@ -34,6 +34,30 @@ const getServiceHired = async (idUser: number, estado: boolean) => {
     })
 }
 
+
+const getServiceWorkerHired = async (idTrabajador: number, estado: boolean) => {
+    const serviciosContradados = await prisma.servicioContratado.findMany({
+        where: { idTrabajador: idTrabajador, estado: estado },
+        include: { Trabajador: true },
+    });
+
+    return serviciosContradados.map(serviciosContradados => {
+        return {
+            id: serviciosContradados.id,
+            descripcion: serviciosContradados.descripcion,
+            fechaInicio: serviciosContradados.fechaInicio,
+            fechaFin: serviciosContradados.fechaFin,
+            costo: serviciosContradados.costo,
+            usuario: {
+                idUsuario: serviciosContradados.Trabajador.id, 
+                nombre: serviciosContradados.Trabajador.nombre,
+                tokenFCM: serviciosContradados.Trabajador.tokenFCM,
+            }
+        }
+    })
+
+}
+
 const updateStatusService = async (idServicio: number, estado: boolean) => {
     const result = await prisma.servicioContratado.update({
         where: { id: idServicio },
@@ -80,8 +104,10 @@ const createServiceHired = async (servicioContratado: ServicioContratado) => {
 
 }
 
+
 export {
     getServiceHired,
     createServiceHired,
     updateStatusService,
+    getServiceWorkerHired
 }

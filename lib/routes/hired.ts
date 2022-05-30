@@ -13,6 +13,9 @@ router.put('/:idServiceHired', HiredController.updateStatusService);
 // Get services depending on the status
 router.get('/:idUser/:status', HiredController.getServiceHired);
 
+// Get services depending on the status of the worker
+router.get('/worker/:idWorker/:status', HiredController.getServiceWorkerHired);
+
 
 
 
