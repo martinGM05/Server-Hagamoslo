@@ -49,9 +49,7 @@ const getServiceWorkerHired = async (idTrabajador: number, estado: boolean) => {
             fechaFin: serviciosContradados.fechaFin,
             costo: serviciosContradados.costo,
             usuario: {
-                idUsuario: serviciosContradados.Trabajador.id, 
-                nombre: serviciosContradados.Trabajador.nombre,
-                tokenFCM: serviciosContradados.Trabajador.tokenFCM,
+                idUsuario: serviciosContradados.idUsuario,
             }
         }
     })
