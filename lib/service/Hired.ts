@@ -51,6 +51,8 @@ const getServiceWorkerHired = async (idTrabajador: number, estado: boolean) => {
             usuario: {
                 idUsuario: serviciosContradados.Usuario.id,
                 nombre: serviciosContradados.Usuario.nombre,
+                latitud: serviciosContradados.Usuario.latitud,
+                longitud: serviciosContradados.Usuario.longitud
             }
         }
     })
