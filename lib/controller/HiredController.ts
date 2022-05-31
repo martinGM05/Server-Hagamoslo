@@ -8,7 +8,7 @@ class HiredController {
         const { idUser, status } = req.params;
         const statusCast = status === 'true' ? true : false;
         const services = await getServiceHired(Number(idUser), statusCast);
-        if (services.length > 0) {
+        if (services) {
             res.status(200).json(services);
         } else {
             res.status(204).json({

@@ -32,9 +32,11 @@ model Usuario{
   valoracion          Int?        @default(0)
   tags                Servicio[]
   comentarioUsuario   ComentarioUsuario[]
+  Usuario             ServicioContratado[] @relation("Usuario")
   Contratado          ServicioContratado[] @relation("Trabajador")
   Blog                Blog[]
   ComentarioBlog      ComentarioBlog[]
+  UsuarioSala         Sala[] @relation("UsuarioSala")
   Receptor            Sala[] @relation("ReceptorSala")
 }
 
@@ -43,6 +45,7 @@ model Sala{
   idSala        String
   idUsuario     Int
   idReceptor    Int
+  Usuario       Usuario     @relation(name: "UsuarioSala", fields: [idUsuario], references: [id])
   Receptor      Usuario     @relation(name:"ReceptorSala", fields: [idReceptor], references: [id])
 }
 
@@ -50,6 +53,7 @@ model ServicioContratado{
   id            Int         @id @default(autoincrement())
   idUsuario     Int
   idTrabajador  Int
+  Usuario       Usuario     @relation(name:"Usuario", fields: [idUsuario], references: [id])
   Trabajador    Usuario     @relation(name:"Trabajador", fields: [idTrabajador], references: [id])
   descripcion   String      @db.VarChar(100)
   fechaInicio   DateTime    @default(now()) @db.Date
