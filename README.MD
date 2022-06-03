@@ -69,7 +69,34 @@ graph TD;
     Route --> Server;
 ```
 
-
-
-
-
+## Endpoints
+| Metodo | Endpoint | Descripción |
+| -----------  | ----------- | ----------- |
+| GET | /usuarios | Obtiene todos los usuarios |
+| GET | /usuarios/:idUsuario  | Obtiene un usuario por su id |
+| PUT | /usuarios/:idUsuario  | Actualiza un usuario por su id |
+| POST | /usuarios | Crea un usuario |
+| GET | /auth | Autentica un usuario |
+| GET | /workers | Obtiene todos los trabajadores |
+| GET | /workers/:idWorker  | Obtiene un trabajador por su id |
+| PUT | /workers/:idWorker  | Actualiza un trabajador por su id |
+| GET | /service | Obtiene todos los servicios |
+| GET | /service/:idService  | Obtiene un servicio por su id |
+| POST | /service | Crea un servicio |
+| GET | /hired/:idUsuario/true | Obtiene todos los servicios en curso del cliente |
+| GET | /hired/:idUsuario/false | Obtiene todos los servicios en historial del cliente |
+| PUT | /hired/:idService | Actualiza el estado de un servicio |
+| GET | /hired/:idWorker/true | Obtiene todos los servicios en curso del trabajador |
+| GET | /hired/worker/:idWorker/false | Obtiene todos los servicios en historial del trabajador |
+| POST | /hired | Crea un servicio |
+| GET | /salas/:idSala | Obtiene las salas del cliente |
+| POST | /salas | Crea una sala |
+| DELETE | /salas/:idSala | Elimina una sala |
+| GET | /blog/:idUsuario | Obtiene todos los blogs del cliente |
+| GET | /blog | Obtiene todos los blogs |
+| POST | /blog | Crea un blog |
+| DELETE | /blog/:idBlog | Elimina un blog |
+| GET | /comentarioBlog/:idBlog | Obtiene todos los comentarios del blog |
+| POST | /comentarioBlog | Crea un comentario |
+| PUT | /upload/Users/:idUsuario | Actualiza la imagen de perfil de un usuario |
+| GET | /upload/Users/:idUsuario | Obtiene la imagen de perfil de un usuario |
