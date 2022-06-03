@@ -1,6 +1,8 @@
 #   Servidor - Hagámoslo
 >  Este es un servidor del proyecto **Hagámoslo** el cual fue presentado para la materia de Aplicaciones Móviles en el Instituto Tecnológico de Teziutlán.
 
+Link del cliente [![GitHub](https://img.shields.io/github/stars/martinGM05/Hagamoslo-Cliente.svg?style=social)](https://github.com/martinGM05/Hagamoslo-Cliente)
+
 El servidor fue desarrollado con ayuda de algunas librerías de terceros, como:
 
 Si desea descargar el código no se olvide de ejecutar el comando:
