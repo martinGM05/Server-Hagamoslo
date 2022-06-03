@@ -24,12 +24,6 @@ Si desea descargar el código no se olvide de ejecutar el comando:
 ## Pruebas Unitarias
 
 Se han realizado pruebas unitarias con **JEST** solamente en la carpeta Sevice debido a que es la única que contiene la lógica del proyecto.
-
-```mermaid
-graph TD;
-    Prueba --> Código --> Prueba --> Refactorizar --> Refactorizar --> Código
-```
-
 Para poder corrrer las pruebas basta con ejecutra el comando:
 
     npm run test
@@ -41,6 +35,35 @@ Se utilizó [GitHub Actions](https://docs.github.com/en/actions) para automatiza
 Cada vez que se haga un commit a la rama master y pase las pruebas unitarias procederá a construir el proyecto y desplegarlo en el servidor de Azure.
 
 ![GithubActions](https://docs.microsoft.com/es-mx/azure/architecture/solution-ideas/media/devsecops-in-github-data-flow.png)
+
+## Lógica del Servidor
+```mermaid
+graph TD;
+    Database --> Prisma;
+    Prisma --> BlogsService;
+    Prisma --> ComentarioBlogService;
+    Prisma --> ComentariosService;
+    Prisma --> Hired;
+    Prisma --> RoleService;
+    Prisma --> SalaService;
+    Prisma --> SearchService;
+    Prisma --> TagService;
+    Prisma --> UserService;
+    Prisma --> WorkerService;
+    BlogsService --> BlogController;
+    ComentarioBlogService --> ComentarioBlogController;
+    Hired --> HiredController;
+    SalaService --> SalaController;
+    TagService --> TagController;
+    generate-jwt --> UserService;
+    validate-jwt --> UserService;
+    validateFile --> UserService;
+    upload-image --> UserService; 
+    UserService --> UsuariosController;
+    WorkerService --> WorkerController;
+    BlogController --> Route;
+    Route --> Server;
+```
 
 
 
