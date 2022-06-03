@@ -70,7 +70,7 @@ graph TD;
 ```
 
 ## Endpoints
-| Metodo | Endpoint | Descripción |
+| Método | Endpoint | Descripción |
 | -----------  | ----------- | ----------- |
 | GET | /usuarios | Obtiene todos los usuarios |
 | GET | /usuarios/:idUsuario  | Obtiene un usuario por su id |
