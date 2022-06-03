@@ -27,9 +27,9 @@ Se han realizado pruebas unitarias con **JEST** solamente en la carpeta Sevice d
 
 ```mermaid
 graph TD;
-    Implementar casos de prueba --> Implementar Código
-    Refactorizar --> Implementar casos de prueba
-    Implementar casos de prueba --> Refactorizar
+    prueba --> Código
+    Refactorizar --> Prueba
+    prueba --> Refactorizar
 ```
 
 Para poder corrrer las pruebas basta con ejecutra el comando:
