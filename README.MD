@@ -3,8 +3,6 @@
 
 Link del cliente [![GitHub](https://img.shields.io/github/stars/martinGM05/Hagamoslo-Cliente.svg?style=social)](https://github.com/martinGM05/Hagamoslo-Cliente)
 
-El servidor fue desarrollado con ayuda de algunas librerías de terceros, como:
-
 Si desea descargar el código no se olvide de ejecutar el comando:
 
     npm install
@@ -102,3 +100,5 @@ graph TD;
 | POST | /comentarioBlog | Crea un comentario |
 | PUT | /upload/Users/:idUsuario | Actualiza la imagen de perfil de un usuario |
 | GET | /upload/Users/:idUsuario | Obtiene la imagen de perfil de un usuario |
+
+Documentación de los Endpoints: https://documenter.getpostman.com/view/13306582/UyxdK9KG
