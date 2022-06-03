@@ -42,11 +42,9 @@ graph TD;
     Database --> Prisma;
     Prisma --> BlogsService;
     Prisma --> ComentarioBlogService;
-    Prisma --> ComentariosService;
     Prisma --> Hired;
     Prisma --> RoleService;
     Prisma --> SalaService;
-    Prisma --> SearchService;
     Prisma --> TagService;
     Prisma --> UserService;
     Prisma --> WorkerService;
@@ -62,6 +60,12 @@ graph TD;
     UserService --> UsuariosController;
     WorkerService --> WorkerController;
     BlogController --> Route;
+    ComentarioBlogController --> Route;
+    HiredController --> Route;
+    SalaController --> Route;
+    TagController --> Route;
+    UsuariosController --> Route;
+    WorkerController --> Route;
     Route --> Server;
 ```
 
